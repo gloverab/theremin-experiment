@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <title>Theremin</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+
+  <body>
+    <h1>Theremin</h1>
+
+    <div class="form-container">
+
+      <form>
+        <p>
+          <label>Osc 2 Detune</label>
+          <input type="range" name="oscillator-2-detune" min="0" max="128" class="slider" id="oscillator-2-detune">
+        </p>
+
+        <p>
+          <label>Osc 2 Gain</label>
+          <input type="range" name="oscillator-2-gain" min="1" max="128" class="slider" id="oscillator-2-gain">
+        </p>
+      </form>
+
+    </div>
+
+    <script src="http://reverbjs.org/reverb.js"></script>
+    <script src="theremin.js"></script>
+  </body>
+
+</html>
