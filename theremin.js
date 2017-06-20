@@ -6,7 +6,7 @@ maxGain = 1
 
 var context1 = new AudioContext()
 var context2 = new AudioContext()
-reverbjs.extend(context1)
+// reverbjs.extend(context1)
 
 oscillator1 = null
 oscillator2 = null
@@ -14,17 +14,17 @@ oscillator2 = null
 var gainNode1 = context1.createGain()
 var gainNode2 = context2.createGain()
 
-// Verb stuff! May not work...
+// Verb stuff! Isn't hooked up to anything right now.
 
-var reverbUrl = "./impulse-responses/wet_singing.mp3"
-var reverbNode = context1.createReverbFromUrl(reverbUrl, function() {
-  reverbNode.connect(context1.destination);
-})
+// var reverbUrl = "./impulse-responses/wet_singing.mp3"
+// var reverbNode = context1.createReverbFromUrl(reverbUrl, function() {
+//   reverbNode.connect(context1.destination);
+// })
 
-var sourceUrl = "./impulse-responses/dry_singing.mp3";
-var sourceNode = context1.createSourceFromUrl(sourceUrl, function() {
-  sourceNode.connect(reverbNode);
-})
+// var sourceUrl = "./impulse-responses/dry_singing.mp3";
+// var sourceNode = context1.createSourceFromUrl(sourceUrl, function() {
+//   sourceNode.connect(reverbNode);
+// })
 
 // Calculations
 
