@@ -69,10 +69,17 @@ document.body.addEventListener('mousedown', function (event) {
 })
 
 // Mouseup events
-document.body.addEventListener('mouseup', function () {
-  mousedown = false
+document.body.addEventListener('mouseup', function() {
+  stopSound()
+})
 
-  // Stopping everything, provided that there is something happening.
+document.body.addEventListener('mouseleave', function() {
+  stopSound()
+})
+
+function stopSound() {
+  mousedown = false
+  
   if (oscillator1) {
     oscillator1.stop(audioContext.currentTime)
     oscillator2.stop(audioContext.currentTime)
@@ -80,7 +87,7 @@ document.body.addEventListener('mouseup', function () {
     oscillator1.disconnect()
     oscillator2.disconnect()
   }
-})
+}
 
 document.body.addEventListener('mousemove', function(event) {
   if (mousedown) {
@@ -89,7 +96,8 @@ document.body.addEventListener('mousemove', function(event) {
   }
 })
 
-document.getElementById('oscillator-2-detune-reset').addEventListener('click', function() {
+document.getElementById('oscillator-2-detune-reset').addEventListener('click', function(e) {
+  e.preventDefault()
   document.getElementById('oscillator-2-detune').value = 64
 })
 
