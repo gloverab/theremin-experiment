@@ -14,7 +14,7 @@ p {
   display: table-row;
 }
 
-label {
+label, a {
   display: table-cell;
 }
 

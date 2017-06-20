@@ -10,8 +10,8 @@ var audioContext = new AudioContext()
 oscillator1 = null
 oscillator2 = null
 
-var gainNode1 = audioContext.createGain()
-var gainNode2 = audioContext.createGain()
+var oscillator1OutputGain = audioContext.createGain()
+var oscillator2OutputGain = audioContext.createGain()
 
 // Verb stuff! Isn't hooked up to anything right now.
 
@@ -58,10 +58,10 @@ document.body.addEventListener('mousedown', function (event) {
   setOscillator2(event)
   
   // Connecting oscillators to gain
-  oscillator1.connect(gainNode1)
-  oscillator2.connect(gainNode2)
-  gainNode1.connect(audioContext.destination)
-  gainNode2.connect(audioContext.destination)
+  oscillator1.connect(oscillator1OutputGain)
+  oscillator2.connect(oscillator2OutputGain)
+  oscillator1OutputGain.connect(audioContext.destination)
+  oscillator2OutputGain.connect(audioContext.destination)
 
   // Staring oscillators
   oscillator1.start(audioContext.currentTime)
@@ -89,27 +89,29 @@ document.body.addEventListener('mousemove', function(event) {
   }
 })
 
+document.getElementById('oscillator-2-detune-reset').addEventListener('click', function() {
+  document.getElementById('oscillator-2-detune').value = 64
+})
+
+
 // document.body.addEventListener('keydown', function(event) {
   
 //   switch(event.key.toLocaleLowerCase()) {
 //     case "a":
 //     oscillator1.frequency.setTargetAtTime(calculateFrequency(200), audioContext.currentTime, 0.01)
 //   }
-
 // })
 
-document.getElementById('oscillator-2-detune').addEventListener('change', function(event) {
-  event.currentTarget.value
-})
+
 
 // Set Oscillator Methods
 
 function setOscillator1(event) {
   oscillator1.frequency.setTargetAtTime(calculateFrequency(event.clientX), audioContext.currentTime, 0.01)
-  gainNode1.gain.setTargetAtTime(calculateGain(event.clientY), audioContext.currentTime, 0.01)
+  oscillator1OutputGain.gain.setTargetAtTime(calculateGain(event.clientY), audioContext.currentTime, 0.01)
 }
 
 function setOscillator2(event) {
   oscillator2.frequency.setTargetAtTime((calculateFrequency2(event.clientX)), audioContext.currentTime, 0.01)
-  gainNode2.gain.setTargetAtTime((calculateGain2(event.clientY)), audioContext.currentTime, 0.01)
+  oscillator2OutputGain.gain.setTargetAtTime((calculateGain2(event.clientY)), audioContext.currentTime, 0.01)
 }
