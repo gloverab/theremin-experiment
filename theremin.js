@@ -4,25 +4,24 @@ maxFrequency = 2000
 minGain = 0
 maxGain = 1
 
-var context1 = new AudioContext()
-var context2 = new AudioContext()
-// reverbjs.extend(context1)
+var audioContext = new AudioContext()
+// reverbjs.extend(audioContext)
 
 oscillator1 = null
 oscillator2 = null
 
-var gainNode1 = context1.createGain()
-var gainNode2 = context2.createGain()
+var gainNode1 = audioContext.createGain()
+var gainNode2 = audioContext.createGain()
 
 // Verb stuff! Isn't hooked up to anything right now.
 
 // var reverbUrl = "./impulse-responses/wet_singing.mp3"
-// var reverbNode = context1.createReverbFromUrl(reverbUrl, function() {
-//   reverbNode.connect(context1.destination);
+// var reverbNode = audioContext.createReverbFromUrl(reverbUrl, function() {
+//   reverbNode.connect(audioContext.destination);
 // })
 
 // var sourceUrl = "./impulse-responses/dry_singing.mp3";
-// var sourceNode = context1.createSourceFromUrl(sourceUrl, function() {
+// var sourceNode = audioContext.createSourceFromUrl(sourceUrl, function() {
 //   sourceNode.connect(reverbNode);
 // })
 
@@ -52,8 +51,8 @@ document.body.addEventListener('mousedown', function (event) {
   mousedown = true
 
   // Creating oscillators
-  oscillator1 = context1.createOscillator()
-  oscillator2 = context2.createOscillator()
+  oscillator1 = audioContext.createOscillator()
+  oscillator2 = audioContext.createOscillator()
 
   setOscillator1(event)
   setOscillator2(event)
@@ -61,12 +60,12 @@ document.body.addEventListener('mousedown', function (event) {
   // Connecting oscillators to gain
   oscillator1.connect(gainNode1)
   oscillator2.connect(gainNode2)
-  gainNode1.connect(context1.destination)
-  gainNode2.connect(context2.destination)
+  gainNode1.connect(audioContext.destination)
+  gainNode2.connect(audioContext.destination)
 
   // Staring oscillators
-  oscillator1.start(context1.currentTime)
-  oscillator2.start(context2.currentTime)
+  oscillator1.start(audioContext.currentTime)
+  oscillator2.start(audioContext.currentTime)
 })
 
 // Mouseup events
@@ -75,8 +74,8 @@ document.body.addEventListener('mouseup', function () {
 
   // Stopping everything, provided that there is something happening.
   if (oscillator1) {
-    oscillator1.stop(context1.currentTime)
-    oscillator2.stop(context2.currentTime)
+    oscillator1.stop(audioContext.currentTime)
+    oscillator2.stop(audioContext.currentTime)
 
     oscillator1.disconnect()
     oscillator2.disconnect()
@@ -94,7 +93,7 @@ document.body.addEventListener('mousemove', function(event) {
   
 //   switch(event.key.toLocaleLowerCase()) {
 //     case "a":
-//     oscillator1.frequency.setTargetAtTime(calculateFrequency(200), context1.currentTime, 0.01)
+//     oscillator1.frequency.setTargetAtTime(calculateFrequency(200), audioContext.currentTime, 0.01)
 //   }
 
 // })
@@ -106,11 +105,11 @@ document.getElementById('oscillator-2-detune').addEventListener('change', functi
 // Set Oscillator Methods
 
 function setOscillator1(event) {
-  oscillator1.frequency.setTargetAtTime(calculateFrequency(event.clientX), context1.currentTime, 0.01)
-  gainNode1.gain.setTargetAtTime(calculateGain(event.clientY), context1.currentTime, 0.01)
+  oscillator1.frequency.setTargetAtTime(calculateFrequency(event.clientX), audioContext.currentTime, 0.01)
+  gainNode1.gain.setTargetAtTime(calculateGain(event.clientY), audioContext.currentTime, 0.01)
 }
 
 function setOscillator2(event) {
-  oscillator2.frequency.setTargetAtTime((calculateFrequency2(event.clientX)), context2.currentTime, 0.01)
-  gainNode2.gain.setTargetAtTime((calculateGain2(event.clientY)), context2.currentTime, 0.01)
+  oscillator2.frequency.setTargetAtTime((calculateFrequency2(event.clientX)), audioContext.currentTime, 0.01)
+  gainNode2.gain.setTargetAtTime((calculateGain2(event.clientY)), audioContext.currentTime, 0.01)
 }
